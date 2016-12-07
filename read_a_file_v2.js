@@ -1,0 +1,13 @@
+var fileName = process.argv[2];
+var fs = require("fs-promise");
+
+var promise = fs.readFile(fileName);
+promise.then(function(buffer) {
+  var fileContent = buffer.toString();
+  fileContent = fileContent.toUpperCase();
+  console.log("\nThe content of " + fileName + " changed to uppercase is:", fileContent);
+});
+promise.catch(function(error) {
+  console.log("\nSorry, there is no such file or directory: ", fileName);
+  console.log(error.message, "\n");
+});
