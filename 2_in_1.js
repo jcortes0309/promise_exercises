@@ -33,19 +33,19 @@ var intersperse = [];
 
 fs.readFile(input_file_1)
   .then(function(file_1_buffer) {
-    file_1_content = file_1_buffer.toString();
-    file_1_content = file_1_content.split("\n");
+    file_1_content = file_1_buffer.toString().split("\n");
     return fs.readFile(input_file_2);
   })
   .then(function(file_2_buffer) {
-    var file_2_content = file_2_buffer.toString();
-    file_2_content = file_2_content.split("\n");
+    file_2_content = file_2_buffer.toString().split("\n");
     file_1_content.forEach(function(line, idx) {
       intersperse.push(line);
       intersperse.push(file_2_content[idx]);
     });
-    console.log(intersperse);
     return fs.writeFile(outputFile, intersperse.join("\n"));
+  })
+  .then(function() {
+    console.log("It worked.  We wrote the file!");
   })
   .catch(function(error) {
     console.log("\nSorry, there is no such file or directory: ");
